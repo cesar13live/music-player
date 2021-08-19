@@ -64,6 +64,10 @@ function nextSong() {
     playSong();
   }
 
+  function updateProgress(e){
+      console.log(e.srcElement.currentTime)
+  }
+
 //event listeners
 
 playBTN.addEventListener('click',() => {
