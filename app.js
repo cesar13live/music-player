@@ -65,7 +65,17 @@ function nextSong() {
   }
 
   function updateProgress(e){
-      console.log(e.srcElement.currentTime)
+    const {duration,currentTime} = e.srcElement;
+    const progressPercent = (currentTime / duration) * 100
+    progress.style.width = `${progressPercent}%`
+  }
+
+  function setProgress(e){
+    const width = this.clientWidth
+    const clickX  = e.offsetX
+    // console.log(clickX)
+    const duration = audio.duration
+    audio.currentTime = (clickX/width) * duration
   }
 
 //event listeners
@@ -84,4 +94,7 @@ playBTN.addEventListener('click',() => {
 
 prevBTN.addEventListener('click',prevSong)
 nextBTN.addEventListener('click',nextSong)
+audio.addEventListener('timeupdate',updateProgress)
+progressContainer.addEventListener('click',setProgress)
+audio.addEventListener('ended', nextSong)
 
